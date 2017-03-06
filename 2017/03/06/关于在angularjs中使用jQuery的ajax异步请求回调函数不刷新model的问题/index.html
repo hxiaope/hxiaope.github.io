@@ -6,17 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Hexo使用 | Hxiaope的博客</title>
+  <title>关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题 | Hxiaope的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端不精，语言不通，小白一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hxiaope的博客">
-<meta property="og:url" content="http://yoursite.com/tags/Hexo使用/index.html">
+  <meta name="description" content="问题最近项目页面用到angularjs，没学过就仿造里面自带的例子就上手了项目开发，按照里面的写法刚开始还很好使，但是用着用着还是会有些地方
+会用上jQuery的东西，其中就有ajax的异步请求，后台功能写好了以后测试提交发现页面无法显示model的值，虽然进入了回调函数值也有了，但
+是页面显示不出来，等第二次提交的时候才会显示出来，于是我猜是两个问题：
+可能处于不同的域
+model没有刷新
+然后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题">
+<meta property="og:url" content="http://yoursite.com/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/index.html">
 <meta property="og:site_name" content="Hxiaope的博客">
-<meta property="og:description" content="前端不精，语言不通，小白一枚">
+<meta property="og:description" content="问题最近项目页面用到angularjs，没学过就仿造里面自带的例子就上手了项目开发，按照里面的写法刚开始还很好使，但是用着用着还是会有些地方
+会用上jQuery的东西，其中就有ajax的异步请求，后台功能写好了以后测试提交发现页面无法显示model的值，虽然进入了回调函数值也有了，但
+是页面显示不出来，等第二次提交的时候才会显示出来，于是我猜是两个问题：
+可能处于不同的域
+model没有刷新
+然后">
+<meta property="og:updated_time" content="2017-03-06T15:38:25.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hxiaope的博客">
-<meta name="twitter:description" content="前端不精，语言不通，小白一枚">
+<meta name="twitter:title" content="关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题">
+<meta name="twitter:description" content="问题最近项目页面用到angularjs，没学过就仿造里面自带的例子就上手了项目开发，按照里面的写法刚开始还很好使，但是用着用着还是会有些地方
+会用上jQuery的东西，其中就有ajax的异步请求，后台功能写好了以后测试提交发现页面无法显示model的值，虽然进入了回调函数值也有了，但
+是页面显示不出来，等第二次提交的时候才会显示出来，于是我猜是两个问题：
+可能处于不同的域
+model没有刷新
+然后">
   
     <link rel="alternative" href="/atom.xml" title="Hxiaope的博客" type="application/atom+xml">
   
@@ -164,75 +180,168 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/05/hello-world/" class="archive-article-date">
-  	<time datetime="2017-03-05T02:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/05/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" class="archive-article-date">
+  	<time datetime="2017-03-06T14:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最近项目页面用到angularjs，没学过就仿造里面自带的例子就上手了项目开发，按照里面的写法刚开始还很好使，但是用着用着还是会有些地方</p>
+<p>会用上jQuery的东西，其中就有ajax的异步请求，后台功能写好了以后测试提交发现页面无法显示model的值，虽然进入了回调函数值也有了，但</p>
+<p>是页面显示不出来，等第二次提交的时候才会显示出来，于是我猜是两个问题：</p>
+<p><strong>可能处于不同的域</strong></p>
+<p><strong>model没有刷新</strong></p>
+<p>然后仔细看了一下域是同一个页面也不是什么对象也没有用其他会产生子域的angular指令，所以域是相同的</p>
+<p>后来百度了一下果然不止我一个人有这个问题，其中原因就是用jQuery的ajax回调造成不刷新的问题</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>$scope.$apply();
+或者
+$scope.$apply(function (){
+    ....你变更的数据
+});
+</code></pre><p><code>Scope</code>提供<code>$watch</code>方法监视<code>Model</code>的变化。</p>
+<p><code>Scope</code>提供<code>$apply</code>方法传播<code>Model</code>的变化。</p>
+<p><code>Scope</code>可以继承，用来隔离不同的<code>application components</code>和属性访问权限。</p>
+<p><code>Scope</code>为<code>Expressions</code>的计算提供上下文。</p>
+<h2 id="apply"><a href="#apply" class="headerlink" title="$apply()"></a>$apply()</h2><p>实际上是由<code>scope.digest()</code>完成的，但是我们几乎从来就没有直接调用过这个方法，而是调用<code>scope.apply()</code>方法，</p>
+<p>是因为在<code>scope.apply()</code>方法里面，它会去调用<code>scope.digest()</code>方法。<code>scope.apply()</code>方法带一个函数或者一个表达式，然后执行它，最后调用</p>
+<p><code>scope.digest()</code>方法去更新<code>bindings</code>或者<code>watchers</code>。</p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a href="http://www.jb51.net/article/59538.htm" target="_blank" rel="external">相关–angularJS中$apply()方法详解</a></p>
+<p><a href="http://blog.csdn.net/dm_vincent/article/details/38705099" target="_blank" rel="external">相关– 理解Angular中的$apply()以及$digest()</a></p>
+<p><a href="http://www.sitepoint.com/understanding-angulars-apply-digest/" target="_blank" rel="external">Understanding Angular’s $apply() and $digest()</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hexo使用</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开始</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery ajax</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
+        			<a href="/categories/问题/" class="article-tag-list-link color3">问题</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/03/05/第一次搭建Hexo+Github个人博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第一次搭建Hexo+Github个人博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -255,9 +364,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
