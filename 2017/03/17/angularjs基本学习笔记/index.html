@@ -6,17 +6,39 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hxiaope的博客</title>
+  <title>angularjs基本学习笔记 | Hxiaope的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端不精，语言不通，小白一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hxiaope的博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="更新时间
+2017-3-17
+
+表达式双大括号表示{{model}}
+通过$interpolateProvider的配置来更换表示符号
+var Myapp=angualr.module(&amp;apos;Myapp&amp;apos;,[])
+.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol(&amp;apos;[[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs基本学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/17/angularjs基本学习笔记/index.html">
 <meta property="og:site_name" content="Hxiaope的博客">
-<meta property="og:description" content="前端不精，语言不通，小白一枚">
+<meta property="og:description" content="更新时间
+2017-3-17
+
+表达式双大括号表示{{model}}
+通过$interpolateProvider的配置来更换表示符号
+var Myapp=angualr.module(&amp;apos;Myapp&amp;apos;,[])
+.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol(&amp;apos;[[">
+<meta property="og:updated_time" content="2017-03-17T07:54:22.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hxiaope的博客">
-<meta name="twitter:description" content="前端不精，语言不通，小白一枚">
+<meta name="twitter:title" content="angularjs基本学习笔记">
+<meta name="twitter:description" content="更新时间
+2017-3-17
+
+表达式双大括号表示{{model}}
+通过$interpolateProvider的配置来更换表示符号
+var Myapp=angualr.module(&amp;apos;Myapp&amp;apos;,[])
+.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol(&amp;apos;[[">
   
     <link rel="alternative" href="/atom.xml" title="Hxiaope的博客" type="application/atom+xml">
   
@@ -170,36 +192,110 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-angularjs基本学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/17/angularjs基本学习笔记/" class="archive-article-date">
-  	<time datetime="2017-03-17T06:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/17/angularjs基本学习笔记/">angularjs基本学习笔记</a>
+    <h1 class="article-title" itemprop="name">
+      angularjs基本学习笔记
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/17/angularjs基本学习笔记/" class="archive-article-date">
+  	<time datetime="2017-03-17T06:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="更新时间"><a href="#更新时间" class="headerlink" title="更新时间"></a>更新时间</h4><ul>
+<li>2017-3-17</li>
+</ul>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><pre><code>双大括号表示{{model}}
+</code></pre><p>通过<code>$interpolateProvider</code>的配置来更换表示符号</p>
+<pre><code>var Myapp=angualr.module(&apos;Myapp&apos;,[])
+.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol(&apos;[[&apos;).endSymbol(&apos;]]&apos;);
+});
+</code></pre><p>表达式就可以更换为</p>
+<pre><code>[[model]]
+</code></pre><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p><code>ng-app=&quot;myApp&quot;</code>定义一个名字为myApp的应用程序，这个指令使用在标</p>
+<p>签当中，标签开始到结束就是改App的应用范围。</p>
+<p><code>ng-controller</code>指令定义了应用程序控制器，一些事件和操作写在里面。</p>
+<h3 id="一个js文件的基本格式"><a href="#一个js文件的基本格式" class="headerlink" title="一个js文件的基本格式"></a>一个js文件的基本格式</h3><pre><code>Var myApp=angular.module(&apos;myApp&apos;,[]);
+myApp.config(function(){
+    .........
+});
+myApp.filter(&apos;filter&apos;,function(){
+...................
+});
+myApp.controller(&apos;myController&apos;,function($scope,$http){
+    function init(){
+    ......................
+    }
+    init();
+})
+</code></pre><h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>有5个核心组件作为依赖注入</p>
+<ul>
+<li>value</li>
+<li>factory</li>
+<li>service</li>
+<li>provider</li>
+<li>constant</li>
+</ul>
+<p>例子</p>
+<h4 id="value"><a href="#value" class="headerlink" title="value"></a>value</h4><pre><code>var app=angular.module(&apos;app&apos;,[]);
+app.value(&apos;name&apos;,5);
+name=5
+</code></pre><h4 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h4><pre><code>factory作为一个函数的返回值
+mainApp.factory(&apos;MathService&apos;, function() {
+var factory = {};
+
+factory.multiply = function(a, b) {
+  return a * b
+}
+return factory;
+});
+</code></pre><h4 id="service"><a href="#service" class="headerlink" title="service"></a>service</h4><pre><code>// 在 service 中注入 factory &quot;MathService&quot;
+mainApp.service(&apos;CalcService&apos;, function(MathService){
+this.square = function(a) {
+  return MathService.multiply(a,a);
+}
+});
+</code></pre><h4 id="在Controller调用这些服务"><a href="#在Controller调用这些服务" class="headerlink" title="在Controller调用这些服务"></a>在Controller调用这些服务</h4><pre><code>mainApp.controller(&apos;CalcController&apos;, function($scope, CalcService, defaultInput) {
+        $scope.number = defaultInput;
+        $scope.result = CalcService.square($scope.number);
+
+        $scope.square = function() {
+           $scope.result = CalcService.square($scope.number);
+        }
+ });
+</code></pre><h4 id="Provider也可以定义factory和Service"><a href="#Provider也可以定义factory和Service" class="headerlink" title="Provider也可以定义factory和Service"></a>Provider也可以定义factory和Service</h4><pre><code>mainApp.config(function($provide) {
+$provide.provider(&apos;MathService&apos;, function() {
+  this.$get = function() {
+     var factory = {};  
+
+     factory.multiply = function(a, b) {
+        return a * b; 
+     }
+     return factory;
+  };
+});
+});
+</code></pre><h4 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h4><pre><code>constant(常量)用来在配置阶段传递数值，注意这个常量在配置阶段是不可用的。
+mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -215,7 +311,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -228,229 +324,86 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/17/angularjs基本学习笔记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" class="archive-article-date">
-  	<time datetime="2017-03-06T14:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/">关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/问题/" class="article-tag-list-link color3">问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/06/注解ExcelUtils/" class="archive-article-date">
-  	<time datetime="2017-03-06T14:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/06/注解ExcelUtils/">ExcelUtils</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">工具类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具/" class="article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/05/hello-world/" class="archive-article-date">
-  	<time datetime="2017-03-05T02:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hexo使用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开始</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/05/第一次搭建Hexo+Github个人博客/" class="archive-article-date">
-  	<time datetime="2017-03-05T02:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/05/第一次搭建Hexo+Github个人博客/">第一次搭建Hexo+Github个人博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -473,8 +426,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
