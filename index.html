@@ -172,6 +172,241 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MySql按周，按月，按日分组统计数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/15/MySql按周，按月，按日分组统计数据/">MySql按周，按月，按日分组统计数据</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/15/MySql按周，按月，按日分组统计数据/" class="archive-article-date">
+  	<time datetime="2017-05-15T03:18:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>select DATE_FORMAT(create_time,&apos;%Y%u&apos;) weeks,count(caseid) count from tc_case group by weeks; 
+select DATE_FORMAT(create_time,&apos;%Y%m%d&apos;) days,count(caseid) count from tc_case group by days; 
+select DATE_FORMAT(create_time,&apos;%Y%m&apos;) months,count(caseid) count from tc_case group by months;
+</code></pre><ul>
+<li>DATE_FORMAT(date,format)<br>根据format 字符串格式化date值，修饰符如下</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%M</td>
+<td style="text-align:right">月名字(January……December)</td>
+</tr>
+<tr>
+<td>%W</td>
+<td style="text-align:right">星期名字(Sunday……Saturday)</td>
+</tr>
+<tr>
+<td>%D</td>
+<td style="text-align:right">有英语前缀的月份的日期(1st, 2nd, 3rd, 等等。)</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td style="text-align:right">年, 数字, 4 位</td>
+</tr>
+<tr>
+<td>%y</td>
+<td style="text-align:right">年, 数字, 2 位</td>
+</tr>
+<tr>
+<td>%a</td>
+<td style="text-align:right">缩写的星期名字(Sun……Sat)</td>
+</tr>
+<tr>
+<td>%d</td>
+<td style="text-align:right">月份中的天数, 数字(00……31)</td>
+</tr>
+<tr>
+<td>%e</td>
+<td style="text-align:right">月份中的天数, 数字(0……31)</td>
+</tr>
+<tr>
+<td>%m</td>
+<td style="text-align:right">月, 数字(01……12)</td>
+</tr>
+<tr>
+<td>%c</td>
+<td style="text-align:right">月, 数字(1……12)</td>
+</tr>
+<tr>
+<td>%b</td>
+<td style="text-align:right">缩写的月份名字(Jan……Dec)</td>
+</tr>
+<tr>
+<td>%j</td>
+<td style="text-align:right">一年中的天数(001……366)</td>
+</tr>
+<tr>
+<td>%H</td>
+<td style="text-align:right">小时(00……23)</td>
+</tr>
+<tr>
+<td>%k</td>
+<td style="text-align:right">小时(0……23)</td>
+</tr>
+<tr>
+<td>%h</td>
+<td style="text-align:right">小时(01……12)</td>
+</tr>
+<tr>
+<td>%I</td>
+<td style="text-align:right">小时(01……12)</td>
+</tr>
+<tr>
+<td>%l</td>
+<td style="text-align:right">小时(1……12)</td>
+</tr>
+<tr>
+<td>%i</td>
+<td style="text-align:right">分钟, 数字(00……59)</td>
+</tr>
+<tr>
+<td>%r</td>
+<td style="text-align:right">时间,12 小时(hh:mm:ss [AP]M)</td>
+</tr>
+<tr>
+<td>%T</td>
+<td style="text-align:right">时间,24 小时(hh:mm:ss)</td>
+</tr>
+<tr>
+<td>%S</td>
+<td style="text-align:right">秒(00……59)</td>
+</tr>
+<tr>
+<td>%s</td>
+<td style="text-align:right">秒(00……59)</td>
+</tr>
+<tr>
+<td>%p</td>
+<td style="text-align:right">AM或PM</td>
+</tr>
+<tr>
+<td>%w</td>
+<td style="text-align:right">一个星期中的天数(0=Sunday ……6=Saturday)</td>
+</tr>
+<tr>
+<td>%U</td>
+<td style="text-align:right">星期(0……52), 这里星期天是星期的第一天</td>
+</tr>
+<tr>
+<td>%u</td>
+<td style="text-align:right">星期(0……52), 这里星期一是星期的第一天</td>
+</tr>
+<tr>
+<td>%%</td>
+<td style="text-align:right">一个文字“%”。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="销售统计"><a href="#销售统计" class="headerlink" title="销售统计"></a>销售统计</h2><pre><code>SELECT year(payment_date),
+sum(CASE month(payment_date) WHEN 01 THEN amount END) &apos;一月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 02 THEN amount END) &apos;二月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 03 THEN amount END) &apos;三月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 04 THEN amount END) &apos;四月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 05 THEN amount END) &apos;五月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 06 THEN amount END) &apos;六月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 07 THEN amount END) &apos;七月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 08 THEN amount END) &apos;八月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 09 THEN amount END) &apos;九月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 10 THEN amount END) &apos;十月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 11 THEN amount END) &apos;十一月份销售额&apos;,
+sum(CASE month(payment_date) WHEN 12 THEN amount END) &apos;十二月份销售额&apos;
+from payment
+group by year(payment_date);
+</code></pre><h2 id="查询一天，查询一周，查询一个月的数据"><a href="#查询一天，查询一周，查询一个月的数据" class="headerlink" title="查询一天，查询一周，查询一个月的数据"></a>查询一天，查询一周，查询一个月的数据</h2><ul>
+<li><p>查询一天</p>
+<pre><code>select * from table where to_days(column_time) = to_days(now());    结果可能会不准确
+select * from table where date(column_time) = curdate();
+</code></pre></li>
+<li><p>查询一周</p>
+<pre><code>select * from table   where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(column_time);
+</code></pre></li>
+<li><p>查询一个月</p>
+<pre><code>select * from table where DATE_SUB(CURDATE(), INTERVAL 1 MONTH) &lt;= date(column_time);
+</code></pre></li>
+<li><p>查询上个月每天的数据统计</p>
+<pre><code>select DATE_FORMAT(FROM_UNIXTIME(createDate/1000),&apos;%m月%d日&apos;)as date, count(id) from cm_user_detail where
+date_format(FROM_UNIXTIME(createDate/1000),&apos;%Y-%m&apos;) = date_format(date_sub(curdate(), interval 1 month),&apos;%Y-%m&apos;) group by date
+</code></pre></li>
+<li><p>查询本月每天的数据统计</p>
+<pre><code>select DATE_FORMAT(FROM_UNIXTIME(createDate/1000),&apos;%m月%d日&apos;)as date, count(id) from cm_user_detail where
+date_format(FROM_UNIXTIME(createDate/1000),&apos;%Y-%m&apos;) = date_format(date_sub(curdate(), interval 0 month),&apos;%Y-%m&apos;) group by date
+</code></pre></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">日期转换</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/15/MySql按周，按月，按日分组统计数据/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-注解ExcelUtils" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1037,100 +1272,10 @@ $scope.$apply(function (){
 
 
   
-    <article id="post-第一次搭建Hexo+Github个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/05/第一次搭建Hexo+Github个人博客/">第一次搭建Hexo+Github个人博客</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/05/第一次搭建Hexo+Github个人博客/" class="archive-article-date">
-  	<time datetime="2017-03-05T02:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="你好，欢迎来到个人博客。"><a href="#你好，欢迎来到个人博客。" class="headerlink" title="你好，欢迎来到个人博客。"></a>你好，欢迎来到个人博客。</h3><h3 id="搭建方法"><a href="#搭建方法" class="headerlink" title="搭建方法"></a>搭建方法</h3><h5 id="用github账户新建一个仓库，命名为：username-github-io"><a href="#用github账户新建一个仓库，命名为：username-github-io" class="headerlink" title="用github账户新建一个仓库，命名为：username.github.io"></a>用github账户新建一个仓库，命名为：username.github.io</h5><h5 id="默认安装node-js-打开cmd"><a href="#默认安装node-js-打开cmd" class="headerlink" title="默认安装node.js 打开cmd"></a>默认安装node.js 打开cmd</h5><pre><code>node -v
-npm -v
-</code></pre><h5 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h5><h5 id="任意路径任意名字新建文件夹"><a href="#任意路径任意名字新建文件夹" class="headerlink" title="任意路径任意名字新建文件夹"></a>任意路径任意名字新建文件夹</h5><h5 id="进入新建文件夹打开git-Bash-命令行窗口"><a href="#进入新建文件夹打开git-Bash-命令行窗口" class="headerlink" title="进入新建文件夹打开git Bash 命令行窗口"></a>进入新建文件夹打开git Bash 命令行窗口</h5><h5 id="输入命令"><a href="#输入命令" class="headerlink" title="输入命令:"></a>输入命令:</h5><pre><code>npm install hexo -g
-</code></pre><h5 id="输入命令-1"><a href="#输入命令-1" class="headerlink" title="输入命令"></a>输入命令</h5><pre><code>hexo init
-</code></pre><h5 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h5><pre><code>hexo generate
-</code></pre><h5 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h5><pre><code>hexo server
-</code></pre><p>浏览器输入 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
-<h5 id="修改-config-yml-输入命令"><a href="#修改-config-yml-输入命令" class="headerlink" title="修改 _config.yml 输入命令"></a>修改 _config.yml 输入命令</h5><pre><code>vim _config.yml
-</code></pre><h5 id="去到最后一行修改你的github仓库地址"><a href="#去到最后一行修改你的github仓库地址" class="headerlink" title="去到最后一行修改你的github仓库地址"></a>去到最后一行修改你的github仓库地址</h5><pre><code>deploy:
-
- type: git
-
- repo: https://github.com/yourname/yourname.github.io.git
-
- branch: master
-</code></pre><h5 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h5><pre><code>npm install hexo-deployer-git --save
-</code></pre><h5 id="执行命令-1"><a href="#执行命令-1" class="headerlink" title="执行命令"></a>执行命令</h5><pre><code>hexo deploy
-</code></pre><h5 id="访问你的github仓库地址"><a href="#访问你的github仓库地址" class="headerlink" title="访问你的github仓库地址"></a>访问你的github仓库地址</h5><pre><code>yourname.github.io
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/05/第一次搭建Hexo+Github个人博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1216,19 +1361,19 @@ npm -v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">日期转换</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hexo使用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开始</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1241,6 +1386,14 @@ npm -v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hexo使用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开始</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: angularjs | Hxiaope的博客</title>
+  <title>Hxiaope的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前端不精，语言不通，小白一枚">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hxiaope的博客">
-<meta property="og:url" content="http://yoursite.com/tags/angularjs/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Hxiaope的博客">
 <meta property="og:description" content="前端不精，语言不通，小白一枚">
 <meta name="twitter:card" content="summary">
@@ -172,130 +172,105 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-第一次搭建Hexo+Github个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/17/angularjs基本学习笔记/" class="archive-article-date">
-  	<time datetime="2017-03-17T06:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/17/angularjs基本学习笔记/">angularjs基本学习笔记</a>
+      <a class="article-title" href="/2017/03/05/第一次搭建Hexo+Github个人博客/">第一次搭建Hexo+Github个人博客</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/05/第一次搭建Hexo+Github个人博客/" class="archive-article-date">
+  	<time datetime="2017-03-05T02:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="你好，欢迎来到个人博客。"><a href="#你好，欢迎来到个人博客。" class="headerlink" title="你好，欢迎来到个人博客。"></a>你好，欢迎来到个人博客。</h3><h3 id="搭建方法"><a href="#搭建方法" class="headerlink" title="搭建方法"></a>搭建方法</h3><h5 id="用github账户新建一个仓库，命名为：username-github-io"><a href="#用github账户新建一个仓库，命名为：username-github-io" class="headerlink" title="用github账户新建一个仓库，命名为：username.github.io"></a>用github账户新建一个仓库，命名为：username.github.io</h5><h5 id="默认安装node-js-打开cmd"><a href="#默认安装node-js-打开cmd" class="headerlink" title="默认安装node.js 打开cmd"></a>默认安装node.js 打开cmd</h5><pre><code>node -v
+npm -v
+</code></pre><h5 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h5><h5 id="任意路径任意名字新建文件夹"><a href="#任意路径任意名字新建文件夹" class="headerlink" title="任意路径任意名字新建文件夹"></a>任意路径任意名字新建文件夹</h5><h5 id="进入新建文件夹打开git-Bash-命令行窗口"><a href="#进入新建文件夹打开git-Bash-命令行窗口" class="headerlink" title="进入新建文件夹打开git Bash 命令行窗口"></a>进入新建文件夹打开git Bash 命令行窗口</h5><h5 id="输入命令"><a href="#输入命令" class="headerlink" title="输入命令:"></a>输入命令:</h5><pre><code>npm install hexo -g
+</code></pre><h5 id="输入命令-1"><a href="#输入命令-1" class="headerlink" title="输入命令"></a>输入命令</h5><pre><code>hexo init
+</code></pre><h5 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h5><pre><code>hexo generate
+</code></pre><h5 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h5><pre><code>hexo server
+</code></pre><p>浏览器输入 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<h5 id="修改-config-yml-输入命令"><a href="#修改-config-yml-输入命令" class="headerlink" title="修改 _config.yml 输入命令"></a>修改 _config.yml 输入命令</h5><pre><code>vim _config.yml
+</code></pre><h5 id="去到最后一行修改你的github仓库地址"><a href="#去到最后一行修改你的github仓库地址" class="headerlink" title="去到最后一行修改你的github仓库地址"></a>去到最后一行修改你的github仓库地址</h5><pre><code>deploy:
+
+ type: git
+
+ repo: https://github.com/yourname/yourname.github.io.git
+
+ branch: master
+</code></pre><h5 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h5><pre><code>npm install hexo-deployer-git --save
+</code></pre><h5 id="执行命令-1"><a href="#执行命令-1" class="headerlink" title="执行命令"></a>执行命令</h5><pre><code>hexo deploy
+</code></pre><h5 id="访问你的github仓库地址"><a href="#访问你的github仓库地址" class="headerlink" title="访问你的github仓库地址"></a>访问你的github仓库地址</h5><pre><code>yourname.github.io
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">配置</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/05/第一次搭建Hexo+Github个人博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" class="archive-article-date">
-  	<time datetime="2017-03-06T14:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/">关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/问题/" class="article-tag-list-link color3">问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 
           </div>
@@ -317,10 +292,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
