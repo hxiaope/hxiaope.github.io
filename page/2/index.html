@@ -172,6 +172,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/">关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" class="archive-article-date">
+  	<time datetime="2017-03-06T14:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最近项目页面用到angularjs，没学过就仿造里面自带的例子就上手了项目开发，按照里面的写法刚开始还很好使，但是用着用着还是会有些地方</p>
+<p>会用上jQuery的东西，其中就有ajax的异步请求，后台功能写好了以后测试提交发现页面无法显示model的值，虽然进入了回调函数值也有了，但</p>
+<p>是页面显示不出来，等第二次提交的时候才会显示出来，于是我猜是两个问题：</p>
+<p><strong>可能处于不同的域</strong></p>
+<p><strong>model没有刷新</strong></p>
+<p>然后仔细看了一下域是同一个页面也不是什么对象也没有用其他会产生子域的angular指令，所以域是相同的</p>
+<p>后来百度了一下果然不止我一个人有这个问题，其中原因就是用jQuery的ajax回调造成不刷新的问题</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>$scope.$apply();
+或者
+$scope.$apply(function (){
+    ....你变更的数据
+});
+</code></pre><p><code>Scope</code>提供<code>$watch</code>方法监视<code>Model</code>的变化。</p>
+<p><code>Scope</code>提供<code>$apply</code>方法传播<code>Model</code>的变化。</p>
+<p><code>Scope</code>可以继承，用来隔离不同的<code>application components</code>和属性访问权限。</p>
+<p><code>Scope</code>为<code>Expressions</code>的计算提供上下文。</p>
+<h2 id="apply"><a href="#apply" class="headerlink" title="$apply()"></a>$apply()</h2><p>实际上是由<code>scope.digest()</code>完成的，但是我们几乎从来就没有直接调用过这个方法，而是调用<code>scope.apply()</code>方法，</p>
+<p>是因为在<code>scope.apply()</code>方法里面，它会去调用<code>scope.digest()</code>方法。<code>scope.apply()</code>方法带一个函数或者一个表达式，然后执行它，最后调用</p>
+<p><code>scope.digest()</code>方法去更新<code>bindings</code>或者<code>watchers</code>。</p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a href="http://www.jb51.net/article/59538.htm" target="_blank" rel="external">相关–angularJS中$apply()方法详解</a></p>
+<p><a href="http://blog.csdn.net/dm_vincent/article/details/38705099" target="_blank" rel="external">相关– 理解Angular中的$apply()以及$digest()</a></p>
+<p><a href="http://www.sitepoint.com/understanding-angulars-apply-digest/" target="_blank" rel="external">Understanding Angular’s $apply() and $digest()</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery ajax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/问题/" class="article-tag-list-link color3">问题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-第一次搭建Hexo+Github个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -249,6 +351,91 @@ npm -v
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/03/05/第一次搭建Hexo+Github个人博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/05/hello-world/">Hello World</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/05/hello-world/" class="archive-article-date">
+  	<time datetime="2017-03-05T02:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hexo使用</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开始</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/05/hello-world/">展开全文 >></a>
         </p>
       
 
@@ -355,11 +542,11 @@ npm -v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">日期转换</a>
+                <a href="javascript:void(0)" class="js-tag color3">注入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -371,6 +558,14 @@ npm -v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">日期转换</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
@@ -379,7 +574,19 @@ npm -v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日期</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">奇淫技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -391,11 +598,7 @@ npm -v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">奇淫技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">配置</a>
+                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
               </li>
             
             <div class="clearfix"></div>
