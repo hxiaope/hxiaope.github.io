@@ -6,27 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MyBatis注入方式注意${}和#{}的区别 | Hxiaope的博客</title>
+  <title>Tag: 连接池 | Hxiaope的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="项目中遇到一个问题用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。
-解决询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型
-
-用${}传入数据直接显示">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis注入方式注意${}和#{}的区别">
-<meta property="og:url" content="http://yoursite.com/2017/05/24/MyBatis注入方式注意-和-的区别/index.html">
+  <meta name="description" content="前端不精，语言不通，小白一枚">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hxiaope的博客">
+<meta property="og:url" content="http://yoursite.com/tags/连接池/index.html">
 <meta property="og:site_name" content="Hxiaope的博客">
-<meta property="og:description" content="项目中遇到一个问题用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。
-解决询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型
-
-用${}传入数据直接显示">
-<meta property="og:updated_time" content="2017-05-24T01:09:23.231Z">
+<meta property="og:description" content="前端不精，语言不通，小白一枚">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis注入方式注意${}和#{}的区别">
-<meta name="twitter:description" content="项目中遇到一个问题用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。
-解决询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型
-
-用${}传入数据直接显示">
+<meta name="twitter:title" content="Hxiaope的博客">
+<meta name="twitter:description" content="前端不精，语言不通，小白一枚">
   
     <link rel="alternative" href="/atom.xml" title="Hxiaope的博客" type="application/atom+xml">
   
@@ -180,63 +170,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MyBatis注入方式注意-和-的区别" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      MyBatis注入方式注意${}和#{}的区别
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/06/12/Druid数据源使用介绍/" class="archive-article-date">
+  	<time datetime="2017-06-12T07:25:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/06/12/Druid数据源使用介绍/">Druid数据源使用介绍</a>
     </h1>
   
 
-        
-        <a href="/2017/05/24/MyBatis注入方式注意-和-的区别/" class="archive-article-date">
-  	<time datetime="2017-05-24T00:53:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="项目中遇到一个问题"><a href="#项目中遇到一个问题" class="headerlink" title="项目中遇到一个问题"></a>项目中遇到一个问题</h3><p>用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型</p>
-<ul>
-<li><p>用${}传入数据直接显示在生成的sql中，如上面的语句，用 role_id =${roleId,jdbcType=INTEGER},那么sql在解析的时候值为role_id = roleid，执行时会报错;</p>
-</li>
-<li><p>${}方式无法防止sql注入;</p>
-</li>
-<li><p>$一般用入传入数据库对象，比如数据库表名;</p>
-</li>
-<li><p>能用#{}时尽量用#{};</p>
-</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>mybaties排序时使用order by 动态参数时需要注意，使用${}而不用#{};</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">连接池</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">注入</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -249,95 +228,17 @@
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/24/MyBatis注入方式注意-和-的区别/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/06/12/Druid数据源使用介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Druid数据源使用介绍
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/05/24/Oracle日期中的IW和WW的区别/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Oracle日期中的IW和WW的区别</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -360,9 +261,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

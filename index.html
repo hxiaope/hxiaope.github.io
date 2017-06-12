@@ -172,6 +172,139 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Druid数据源使用介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/12/Druid数据源使用介绍/">Druid数据源使用介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/12/Druid数据源使用介绍/" class="archive-article-date">
+  	<time datetime="2017-06-12T07:25:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Druid数据源使用介绍"><a href="#Druid数据源使用介绍" class="headerlink" title="Druid数据源使用介绍"></a>Druid数据源使用介绍</h1><h4 id="Druid介绍"><a href="#Druid介绍" class="headerlink" title="Druid介绍"></a>Druid介绍</h4><p>DruidDataSource是一个数据库连接池的实现，它的设计目标是提供一个当前最好的数据库连接池，在性能、扩展性等方面取得最合适的平衡。Druid能够提供强大的监控和扩展功能。</p>
+<h4 id="DruidDataSource配置"><a href="#DruidDataSource配置" class="headerlink" title="DruidDataSource配置"></a>DruidDataSource配置</h4><pre><code>&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; init-    method=&quot;init&quot; destroy-method=&quot;close&quot;&gt;
+    &lt;!-- 基本属性 url、user、password --&gt;
+    &lt;property name=&quot;url&quot; value=&quot;${jdbc_url}&quot; /&gt;
+    &lt;property name=&quot;username&quot; value=&quot;${jdbc_user}&quot; /&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc_password}&quot; /&gt;
+    &lt;!-- 配置初始化大小、最小、最大 --&gt;
+    &lt;property name=&quot;initialSize&quot; value=&quot;1&quot; /&gt;
+    &lt;property name=&quot;minIdle&quot; value=&quot;1&quot; /&gt;
+    &lt;property name=&quot;maxActive&quot; value=&quot;20&quot; /&gt;
+    &lt;!-- 配置获取连接等待超时的时间 --&gt;
+    &lt;property name=&quot;maxWait&quot; value=&quot;60000&quot; /&gt;
+    &lt;!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --&gt;
+    &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;60000&quot; /&gt;
+    &lt;!-- 配置一个连接在池中最小生存的时间，单位是毫秒 --&gt;
+    &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;300000&quot; /&gt;
+    &lt;property name=&quot;validationQuery&quot; value=&quot;SELECT &apos;x&apos;&quot; /&gt;
+    &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;testOnBorrow&quot; value=&quot;false&quot; /&gt;
+    &lt;property name=&quot;testOnReturn&quot; value=&quot;false&quot; /&gt;
+    &lt;!-- 打开PSCache，并且指定每个连接上PSCache的大小 --&gt;
+    &lt;property name=&quot;poolPreparedStatements&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;maxPoolPreparedStatementPerConnectionSize&quot; value=&quot;20&quot; /&gt;
+    &lt;!-- 配置监控统计拦截的filters --&gt;
+    &lt;property name=&quot;filters&quot; value=&quot;stat&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p>通常来说，只需要修改initialSize、minIdle、maxActive。<br>如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。分库分表较多的数据库，建议配置为false。</p>
+<h4 id="使用Druid的内置监控页面"><a href="#使用Druid的内置监控页面" class="headerlink" title="使用Druid的内置监控页面"></a>使用Druid的内置监控页面</h4><p>Druid内置提供了一个StatViewServlet用于展示Druid的统计信息。</p>
+<p>这个StatViewServlet的用途包括：</p>
+<ul>
+<li>提供监控信息展示的html页面</li>
+<li>提供监控信息的JSON API</li>
+</ul>
+<p>配置：</p>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;DruidStatView&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.alibaba.druid.support.http.StatViewServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DruidStatView&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/druid/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><p>根据配置中的url-pattern来访问内置监控页面，如果是上面的配置，内置监控页面的首页是/druid/index.html</p>
+<p>例如：<a href="http://127.0.0.1:8090/platform/druid/index.html" target="_blank" rel="external">http://127.0.0.1:8090/platform/druid/index.html</a></p>
+<h4 id="检查数据库连接泄漏"><a href="#检查数据库连接泄漏" class="headerlink" title="检查数据库连接泄漏"></a>检查数据库连接泄漏</h4><p>当程序存在缺陷时，申请的连接忘记关闭，这时候，就存在连接泄漏了。Druid提供了RemoveAbandanded相关配置，用来关闭长时间不使用的连接。例如：</p>
+<pre><code>&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method=&quot;close&quot;&gt;
+... ...
+    &lt;property name=&quot;removeAbandoned&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 打开removeAbandoned功能 --&gt;
+    &lt;property name=&quot;removeAbandonedTimeout&quot; value=&quot;1800&quot; /&gt;
+    &lt;!-- 1800秒，也就是30分钟 --&gt;
+    &lt;property name=&quot;logAbandoned&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 关闭abanded连接时输出错误日志 --&gt;
+    ... ...
+&lt;/bean&gt;
+</code></pre><p>当removeAbandoned=true之后，可以在内置监控界面中查看ActiveConnection StackTrace属性的，可以看到未关闭连接的具体堆栈信息，从而方便查出哪些连接泄漏了。</p>
+<p>附：<a href="https://github.com/alibaba/druid/wiki" target="_blank" rel="external">Druid官方wiki</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">连接池</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/12/Druid数据源使用介绍/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-MyBatis注入方式注意-和-的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1104,158 +1237,6 @@ public @interface ExcelAnnotation {
 
 
   
-    <article id="post-angularjs基本学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/17/angularjs基本学习笔记/">angularjs基本学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/17/angularjs基本学习笔记/" class="archive-article-date">
-  	<time datetime="2017-03-17T06:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="更新时间"><a href="#更新时间" class="headerlink" title="更新时间"></a>更新时间</h4><ul>
-<li>2017-3-17</li>
-</ul>
-<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><pre><code>双大括号表示{{model}}
-</code></pre><p>通过<code>$interpolateProvider</code>的配置来更换表示符号</p>
-<pre><code>var Myapp=angualr.module(&apos;Myapp&apos;,[])
-.config(function($interpolateProvider){
-    $interpolateProvider.startSymbol(&apos;[[&apos;).endSymbol(&apos;]]&apos;);
-});
-</code></pre><p>表达式就可以更换为</p>
-<pre><code>[[model]]
-</code></pre><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p><code>ng-app=&quot;myApp&quot;</code>定义一个名字为myApp的应用程序，这个指令使用在标</p>
-<p>签当中，标签开始到结束就是改App的应用范围。</p>
-<p><code>ng-controller</code>指令定义了应用程序控制器，一些事件和操作写在里面。</p>
-<h3 id="一个js文件的基本格式"><a href="#一个js文件的基本格式" class="headerlink" title="一个js文件的基本格式"></a>一个js文件的基本格式</h3><pre><code>Var myApp=angular.module(&apos;myApp&apos;,[]);
-myApp.config(function(){
-    .........
-});
-myApp.filter(&apos;filter&apos;,function(){
-...................
-});
-myApp.controller(&apos;myController&apos;,function($scope,$http){
-    function init(){
-    ......................
-    }
-    init();
-})
-</code></pre><h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>有5个核心组件作为依赖注入</p>
-<ul>
-<li>value</li>
-<li>factory</li>
-<li>service</li>
-<li>provider</li>
-<li>constant</li>
-</ul>
-<p>例子</p>
-<h4 id="value"><a href="#value" class="headerlink" title="value"></a>value</h4><pre><code>var app=angular.module(&apos;app&apos;,[]);
-app.value(&apos;name&apos;,5);
-name=5
-</code></pre><h4 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h4><pre><code>factory作为一个函数的返回值
-mainApp.factory(&apos;MathService&apos;, function() {
-var factory = {};
-
-factory.multiply = function(a, b) {
-  return a * b
-}
-return factory;
-});
-</code></pre><h4 id="service"><a href="#service" class="headerlink" title="service"></a>service</h4><pre><code>// 在 service 中注入 factory &quot;MathService&quot;
-mainApp.service(&apos;CalcService&apos;, function(MathService){
-this.square = function(a) {
-  return MathService.multiply(a,a);
-}
-});
-</code></pre><h4 id="在Controller调用这些服务"><a href="#在Controller调用这些服务" class="headerlink" title="在Controller调用这些服务"></a>在Controller调用这些服务</h4><pre><code>mainApp.controller(&apos;CalcController&apos;, function($scope, CalcService, defaultInput) {
-        $scope.number = defaultInput;
-        $scope.result = CalcService.square($scope.number);
-
-        $scope.square = function() {
-           $scope.result = CalcService.square($scope.number);
-        }
- });
-</code></pre><h4 id="Provider也可以定义factory和Service"><a href="#Provider也可以定义factory和Service" class="headerlink" title="Provider也可以定义factory和Service"></a>Provider也可以定义factory和Service</h4><pre><code>mainApp.config(function($provide) {
-$provide.provider(&apos;MathService&apos;, function() {
-  this.$get = function() {
-     var factory = {};  
-
-     factory.multiply = function(a, b) {
-        return a * b; 
-     }
-     return factory;
-  };
-});
-});
-</code></pre><h4 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h4><pre><code>constant(常量)用来在配置阶段传递数值，注意这个常量在配置阶段是不可用的。
-mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/17/angularjs基本学习笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1345,6 +1326,14 @@ mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">连接池</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
               </li>
              
@@ -1357,23 +1346,11 @@ mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">日期转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1385,11 +1362,11 @@ mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">奇淫技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">配置</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1398,6 +1375,14 @@ mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">开始</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">奇淫技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">配置</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,27 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MyBatis注入方式注意${}和#{}的区别 | Hxiaope的博客</title>
+  <title>Druid数据源使用介绍 | Hxiaope的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="项目中遇到一个问题用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。
-解决询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型
-
-用${}传入数据直接显示">
+  <meta name="description" content="Druid数据源使用介绍Druid介绍DruidDataSource是一个数据库连接池的实现，它的设计目标是提供一个当前最好的数据库连接池，在性能、扩展性等方面取得最合适的平衡。Druid能够提供强大的监控和扩展功能。
+DruidDataSource配置&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;com.alibaba.druid.pool.Dru">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis注入方式注意${}和#{}的区别">
-<meta property="og:url" content="http://yoursite.com/2017/05/24/MyBatis注入方式注意-和-的区别/index.html">
+<meta property="og:title" content="Druid数据源使用介绍">
+<meta property="og:url" content="http://yoursite.com/2017/06/12/Druid数据源使用介绍/index.html">
 <meta property="og:site_name" content="Hxiaope的博客">
-<meta property="og:description" content="项目中遇到一个问题用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。
-解决询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型
-
-用${}传入数据直接显示">
-<meta property="og:updated_time" content="2017-05-24T01:09:23.231Z">
+<meta property="og:description" content="Druid数据源使用介绍Druid介绍DruidDataSource是一个数据库连接池的实现，它的设计目标是提供一个当前最好的数据库连接池，在性能、扩展性等方面取得最合适的平衡。Druid能够提供强大的监控和扩展功能。
+DruidDataSource配置&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;com.alibaba.druid.pool.Dru">
+<meta property="og:updated_time" content="2017-06-12T07:46:12.904Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis注入方式注意${}和#{}的区别">
-<meta name="twitter:description" content="项目中遇到一个问题用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。
-解决询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型
-
-用${}传入数据直接显示">
+<meta name="twitter:title" content="Druid数据源使用介绍">
+<meta name="twitter:description" content="Druid数据源使用介绍Druid介绍DruidDataSource是一个数据库连接池的实现，它的设计目标是提供一个当前最好的数据库连接池，在性能、扩展性等方面取得最合适的平衡。Druid能够提供强大的监控和扩展功能。
+DruidDataSource配置&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;com.alibaba.druid.pool.Dru">
   
     <link rel="alternative" href="/atom.xml" title="Hxiaope的博客" type="application/atom+xml">
   
@@ -180,39 +174,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MyBatis注入方式注意-和-的区别" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Druid数据源使用介绍" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MyBatis注入方式注意${}和#{}的区别
+      Druid数据源使用介绍
     </h1>
   
 
         
-        <a href="/2017/05/24/MyBatis注入方式注意-和-的区别/" class="archive-article-date">
-  	<time datetime="2017-05-24T00:53:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+        <a href="/2017/06/12/Druid数据源使用介绍/" class="archive-article-date">
+  	<time datetime="2017-06-12T07:25:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="项目中遇到一个问题"><a href="#项目中遇到一个问题" class="headerlink" title="项目中遇到一个问题"></a>项目中遇到一个问题</h3><p>用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型</p>
+        <h1 id="Druid数据源使用介绍"><a href="#Druid数据源使用介绍" class="headerlink" title="Druid数据源使用介绍"></a>Druid数据源使用介绍</h1><h4 id="Druid介绍"><a href="#Druid介绍" class="headerlink" title="Druid介绍"></a>Druid介绍</h4><p>DruidDataSource是一个数据库连接池的实现，它的设计目标是提供一个当前最好的数据库连接池，在性能、扩展性等方面取得最合适的平衡。Druid能够提供强大的监控和扩展功能。</p>
+<h4 id="DruidDataSource配置"><a href="#DruidDataSource配置" class="headerlink" title="DruidDataSource配置"></a>DruidDataSource配置</h4><pre><code>&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; init-    method=&quot;init&quot; destroy-method=&quot;close&quot;&gt;
+    &lt;!-- 基本属性 url、user、password --&gt;
+    &lt;property name=&quot;url&quot; value=&quot;${jdbc_url}&quot; /&gt;
+    &lt;property name=&quot;username&quot; value=&quot;${jdbc_user}&quot; /&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc_password}&quot; /&gt;
+    &lt;!-- 配置初始化大小、最小、最大 --&gt;
+    &lt;property name=&quot;initialSize&quot; value=&quot;1&quot; /&gt;
+    &lt;property name=&quot;minIdle&quot; value=&quot;1&quot; /&gt;
+    &lt;property name=&quot;maxActive&quot; value=&quot;20&quot; /&gt;
+    &lt;!-- 配置获取连接等待超时的时间 --&gt;
+    &lt;property name=&quot;maxWait&quot; value=&quot;60000&quot; /&gt;
+    &lt;!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --&gt;
+    &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;60000&quot; /&gt;
+    &lt;!-- 配置一个连接在池中最小生存的时间，单位是毫秒 --&gt;
+    &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;300000&quot; /&gt;
+    &lt;property name=&quot;validationQuery&quot; value=&quot;SELECT &apos;x&apos;&quot; /&gt;
+    &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;testOnBorrow&quot; value=&quot;false&quot; /&gt;
+    &lt;property name=&quot;testOnReturn&quot; value=&quot;false&quot; /&gt;
+    &lt;!-- 打开PSCache，并且指定每个连接上PSCache的大小 --&gt;
+    &lt;property name=&quot;poolPreparedStatements&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;maxPoolPreparedStatementPerConnectionSize&quot; value=&quot;20&quot; /&gt;
+    &lt;!-- 配置监控统计拦截的filters --&gt;
+    &lt;property name=&quot;filters&quot; value=&quot;stat&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p>通常来说，只需要修改initialSize、minIdle、maxActive。<br>如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。分库分表较多的数据库，建议配置为false。</p>
+<h4 id="使用Druid的内置监控页面"><a href="#使用Druid的内置监控页面" class="headerlink" title="使用Druid的内置监控页面"></a>使用Druid的内置监控页面</h4><p>Druid内置提供了一个StatViewServlet用于展示Druid的统计信息。</p>
+<p>这个StatViewServlet的用途包括：</p>
 <ul>
-<li><p>用${}传入数据直接显示在生成的sql中，如上面的语句，用 role_id =${roleId,jdbcType=INTEGER},那么sql在解析的时候值为role_id = roleid，执行时会报错;</p>
-</li>
-<li><p>${}方式无法防止sql注入;</p>
-</li>
-<li><p>$一般用入传入数据库对象，比如数据库表名;</p>
-</li>
-<li><p>能用#{}时尽量用#{};</p>
-</li>
+<li>提供监控信息展示的html页面</li>
+<li>提供监控信息的JSON API</li>
 </ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>mybaties排序时使用order by 动态参数时需要注意，使用${}而不用#{};</p>
+<p>配置：</p>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;DruidStatView&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.alibaba.druid.support.http.StatViewServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DruidStatView&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/druid/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><p>根据配置中的url-pattern来访问内置监控页面，如果是上面的配置，内置监控页面的首页是/druid/index.html</p>
+<p>例如：<a href="http://127.0.0.1:8090/platform/druid/index.html" target="_blank" rel="external">http://127.0.0.1:8090/platform/druid/index.html</a></p>
+<h4 id="检查数据库连接泄漏"><a href="#检查数据库连接泄漏" class="headerlink" title="检查数据库连接泄漏"></a>检查数据库连接泄漏</h4><p>当程序存在缺陷时，申请的连接忘记关闭，这时候，就存在连接泄漏了。Druid提供了RemoveAbandanded相关配置，用来关闭长时间不使用的连接。例如：</p>
+<pre><code>&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method=&quot;close&quot;&gt;
+... ...
+    &lt;property name=&quot;removeAbandoned&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 打开removeAbandoned功能 --&gt;
+    &lt;property name=&quot;removeAbandonedTimeout&quot; value=&quot;1800&quot; /&gt;
+    &lt;!-- 1800秒，也就是30分钟 --&gt;
+    &lt;property name=&quot;logAbandoned&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 关闭abanded连接时输出错误日志 --&gt;
+    ... ...
+&lt;/bean&gt;
+</code></pre><p>当removeAbandoned=true之后，可以在内置监控界面中查看ActiveConnection StackTrace属性的，可以看到未关闭连接的具体堆栈信息，从而方便查出哪些连接泄漏了。</p>
+<p>附：<a href="https://github.com/alibaba/druid/wiki" target="_blank" rel="external">Druid官方wiki</a></p>
 
       
 
@@ -226,11 +264,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">连接池</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">注入</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		
 		</ul>
@@ -297,7 +335,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/24/MyBatis注入方式注意-和-的区别/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/12/Druid数据源使用介绍/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -311,18 +349,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/12/Druid数据源使用介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Druid数据源使用介绍
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/24/Oracle日期中的IW和WW的区别/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Oracle日期中的IW和WW的区别</div>
+    <a href="/2017/05/24/MyBatis注入方式注意-和-的区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MyBatis注入方式注意${}和#{}的区别</div>
       <i class="icon-circle-right"></i>
     </a>
   
