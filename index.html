@@ -172,6 +172,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mybatis中关于OGNL表达式冲突的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/06/Mybatis中关于OGNL表达式冲突的问题/">Mybatis中关于OGNL表达式冲突的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/06/Mybatis中关于OGNL表达式冲突的问题/" class="archive-article-date">
+  	<time datetime="2017-07-06T01:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="项目中遇到一个问题"><a href="#项目中遇到一个问题" class="headerlink" title="项目中遇到一个问题"></a>项目中遇到一个问题</h3><p>在用mybatis写SQL语句的时候，因为需求需要动态SQL，其中有个字段是审核人简称为shr，shr会与与mybatis的OGNL表达式发生冲突导致SQL语法报错。</p>
+<h3 id="变量命名可能发生冲突的变量集合"><a href="#变量命名可能发生冲突的变量集合" class="headerlink" title="变量命名可能发生冲突的变量集合"></a>变量命名可能发生冲突的变量集合</h3><pre><code>bor    (字符|)的英文
+xor    字符^的英文
+and    字符&amp;&amp;
+band   字符&amp;
+eq     字符==
+neq    字符！=
+lt     字符&lt;
+gt     字符&gt;
+lte    字符&lt;=
+gte    字符&gt;=
+shl    字符 &lt;&lt;
+shr    字符&gt;&gt;
+ushr   字符&gt;&gt;&gt;
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis，OGNL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/06/Mybatis中关于OGNL表达式冲突的问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Druid数据源使用介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -711,532 +797,6 @@ group by year(payment_date);
 
 
   
-    <article id="post-注解ExcelUtils" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/03/注解ExcelUtils/">ExcelUtils</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/03/注解ExcelUtils/" class="archive-article-date">
-  	<time datetime="2017-05-03T01:47:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ExcelUtils"><a href="#ExcelUtils" class="headerlink" title="ExcelUtils"></a>ExcelUtils</h2><pre><code>public class ExcelUtils {
-    /**
-    * 为单元格设值
-    *
-    * @param hs    工作区对象
-    * @param row   单元格所在行数
-    * @param col   单元格所在列数
-    * @param value 设置的值
-    */
-    public static void setValue(Sheet hs, int row, int col, String value) {
-        setValue(hs, row, col, value, null);
-    }
-    /**
-    * 为单元格设值
-    *
-    * @param style 单元格样式对象
-    */
-    public static void setValue(Sheet hs, int row, int col, String value, CellStyle style) {
-        Row hr = hs.getRow(row) == null ? hs.createRow(row) : hs.getRow(row);
-        Cell hc = hr.getCell(col) == null ? hr.createCell(col) : hr.getCell(col);
-        if (null != style) {
-            hc.setCellStyle(style);
-        }
-        hc.setCellValue(value);
-    }
-    /**
-    * 为单元格设值，同时给单元格添加边框。
-    *
-    * @param wb    单元格所在excel对象
-    * @param hs    单元格所在工作区对象
-    * @param row   单元格所在行数
-    * @param col   单元格所在列数
-    * @param value 设置的值
-    */
-    public static void setValueWithBorder(Workbook wb, Sheet hs, int row, int col, String value) {
-        setValueWithBorder(wb, hs, row, col, value, null);
-    }
-    /**
-    * 为单元格设值，同时给单元格添加边框。
-    *
-    * @param style 单元格样式对象
-    */
-    public static void setValueWithBorder(Workbook wb, Sheet hs, int row, int col, String value, CellStyle style) {
-        Row hr = hs.getRow(row) == null ? hs.createRow(row) : hs.getRow(row);
-        Cell hc = hr.getCell(col) == null ? hr.createCell(col) : hr.getCell(col);
-        CellStyle cs;
-        if (null != style) {
-            cs = style;
-        } else {
-            cs = wb.createCellStyle();
-        }
-        setCsBorder(cs);
-        hc.setCellStyle(cs);
-        hc.setCellValue(value);
-    }
-    /**
-    * 为单元格设值，同时给单元格添加边框。
-    *
-    * @param wb
-    * @param hs
-    * @param row
-    * @param col
-    * @param value
-    */
-    public static void setValueWithColor(Workbook wb, Sheet hs, int row, int col, String value) {
-        Row hr = hs.getRow(row) == null ? hs.createRow(row) : hs.getRow(row);
-        Cell hc = hr.getCell(col) == null ? hr.createCell(col) : hr.getCell(col);
-        CellStyle cs;
-        cs = wb.createCellStyle();
-        setCsBorder(cs);
-        Font font = wb.createFont();
-        font.setColor(Font.COLOR_RED);
-        cs.setFont(font);
-        hc.setCellStyle(cs);
-        hc.setCellValue(value);
-    }
-    /**
-    * 给单元格设置边框
-    *
-    * @param cs
-    */
-    public static void setCsBorder(CellStyle cs) {
-        cs.setBorderBottom(CellStyle.BORDER_THIN);
-        cs.setBorderLeft(CellStyle.BORDER_THIN);
-        cs.setBorderRight(CellStyle.BORDER_THIN);
-        cs.setBorderTop(CellStyle.BORDER_THIN);
-    }
-    /**
-    * 给单元格设值
-    *
-    * @param cell  单元格对象
-    * @param value 设置的值
-    */
-    public static void setCellValue(Cell cell, Object value) {
-        if (value == null) {
-            return;
-        }
-        if (value instanceof Long || value instanceof Integer || value instanceof Double) {
-            cell.setCellValue(Double.valueOf(String.valueOf(value)));
-        } else {
-            cell.setCellValue(String.valueOf(value));
-        }
-    }
-    /**
-    * 调用此方法，直接下载到客户端
-    *
-    * @param response
-    * @param fileName
-    */
-    public static void download(HttpServletResponse response, Workbook workbook, String fileName) throws FileNotFoundException,
-            SecurityException, IllegalArgumentException, IOException, NoSuchMethodException, IllegalAccessException,
-            InvocationTargetException {
-        response.setHeader(&quot;content-disposition&quot;, &quot;attachment;filename=\&quot;&quot; + new String(fileName.getBytes(&quot;gb2312&quot;), &quot;iso8859-1&quot;) + &quot;\&quot;&quot;);
-        response.setContentType(&quot;APPLICATION/msexcel&quot;);
-        OutputStream out = response.getOutputStream();
-        workbook.write(out);
-        out.close();
-    }
-    /**
-    * 从url读出excel
-    */
-    public static Workbook loadWorkbook(String filePath) throws FileNotFoundException, IOException {
-        InputStream inputStream = new FileInputStream(filePath);
-        boolean isExcel = filePath.toLowerCase().endsWith(&quot;xls&quot;) ? true : false;
-        Workbook workbook = isExcel ? new HSSFWorkbook(inputStream) : new XSSFWorkbook(inputStream);
-        return workbook;
-    }
-    /**
-    * 把excel保存到磁盘
-    */
-    public static void saveToHarddisk(String url, Workbook workbook) throws IOException {
-        BufferedOutputStream bo = new BufferedOutputStream(new FileOutputStream(url));
-        workbook.write(bo);
-        bo.close();
-    }
-    /**
-    * 合并单元格
-    *
-    * @param sheet
-    * @param startRow 开始单元格所在行
-    * @param startCol 开始单元格所在列
-    * @param endRow   结束单元格所在行
-    * @param endCol   结束单元格所在列
-    */
-    public static void mergeRegion(Sheet sheet, int startRow, short startCol, int endRow, short endCol, CellStyle cs) {
-        CellRangeAddress address = new CellRangeAddress(startRow, endRow, startCol, endCol);
-        sheet.addMergedRegion(address);
-        if (cs != null) {
-            setRegionStyle(sheet, address, cs);
-        }
-    }
-    private static void setRegionStyle(Sheet sheet, CellRangeAddress cellRangeAddress, CellStyle cs) {
-        for (int i = cellRangeAddress.getFirstColumn(); i &lt;= cellRangeAddress.getLastColumn(); i++) {
-            Row row = sheet.getRow(i) == null ? sheet.createRow(i) : sheet.getRow(i);
-            for (int j = cellRangeAddress.getFirstColumn(); j &lt;= cellRangeAddress.getLastColumn(); j++) {
-                Cell cell = row.getCell(j) == null ? row.createCell(j) : row.getCell(j);
-                cell.setCellStyle(cs);
-            }
-        }
-    }
-    /**
-    * 创建样式
-    *
-    * @param workbook
-    * @param color
-    */
-    public static CellStyle createFCStyle(Workbook workbook, short color) {
-        CellStyle style = workbook.createCellStyle();
-        Font fort = workbook.createFont();
-        fort.setColor(color);
-        style.setFont(fort);
-        return style;
-    }
-    /**
-    * 拷贝excel区域
-    *
-    * @param wb
-    * @param sourceSheetIndex
-    * @param pTargetSheetIndex
-    * @param pStartRow
-    * @param pEndRow
-    * @param pPosition
-    */
-    public static void copyRows(Workbook wb, int sourceSheetIndex, int pTargetSheetIndex, int pStartRow,
-                                int pEndRow, int pPosition) {
-        Sheet sourceSheet = wb.getSheetAt(sourceSheetIndex);
-        Sheet targetSheet = wb.getSheetAt(pTargetSheetIndex);
-        copyRows(wb, sourceSheet, targetSheet, pStartRow, pEndRow, pPosition);
-    }
-    /**
-    * 拷贝excel区域
-    *
-    * @param wb
-    * @param pSourceSheetName 源sheet
-    * @param pTargetSheetName 目标sheet
-    * @param pStartRow        开始行
-    * @param pEndRow          结束行
-    * @param pPosition        目标sheet的开始行
-    */
-    public static void copyRows(Workbook wb, String pSourceSheetName, String pTargetSheetName, int pStartRow,
-                                int pEndRow, int pPosition) {
-        Sheet sourceSheet = wb.getSheet(pSourceSheetName);
-        Sheet targetSheet = wb.getSheet(pTargetSheetName);
-        copyRows(wb, sourceSheet, targetSheet, pStartRow, pEndRow, pPosition);
-    }
-    /**
-    * 拷贝excel区域
-    */
-    private static void copyRows(Workbook wb, Sheet sourceSheet, Sheet targetSheet, int pStartRow,
-                                int pEndRow, int pPosition) {
-        Row sourceRow = null;
-        Row targetRow = null;
-        Cell sourceCell = null;
-        Cell targetCell = null;
-        CellRangeAddress region = null;
-        int cType;
-        int i;
-        int j;
-        int targetRowFrom;
-        int targetRowTo;
-        if ((pStartRow == -1) || (pEndRow == -1)) {
-            return;
-        }
-        // 拷贝合并的单元格
-        for (i = 0; i &lt; sourceSheet.getNumMergedRegions(); i++) {
-            region = sourceSheet.getMergedRegion(i);
-            if ((region.getFirstRow() &gt;= pStartRow) &amp;&amp; (region.getLastRow() &lt;= pEndRow)) {
-                targetRowFrom = region.getFirstRow() - pStartRow + pPosition;
-                targetRowTo = region.getLastRow() - pStartRow + pPosition;
-                region.setFirstRow(targetRowFrom);
-                region.setLastRow(targetRowTo);
-                targetSheet.addMergedRegion(region);
-            }
-        }
-        // 设置列宽
-        for (i = pStartRow; i &lt;= pEndRow; i++) {
-            sourceRow = sourceSheet.getRow(i);
-            if (sourceRow != null) {
-                for (j = sourceRow.getLastCellNum(); j &gt;= sourceRow.getFirstCellNum(); j--) {
-                    targetSheet.setColumnWidth(j, sourceSheet.getColumnWidth(j));
-                    targetSheet.setColumnHidden(j, false);
-                }
-                break;
-            }
-        }
-        // 拷贝行并填充数据
-        for (; i &lt;= pEndRow; i++) {
-            sourceRow = sourceSheet.getRow(i);
-            if (sourceRow == null) {
-                continue;
-            }
-            targetRow = targetSheet.createRow(i - pStartRow + pPosition);
-            targetRow.setHeight(sourceRow.getHeight());
-            for (j = sourceRow.getFirstCellNum(); j &lt; sourceRow.getPhysicalNumberOfCells(); j++) {
-                sourceCell = sourceRow.getCell(j);
-                if (sourceCell == null) {
-                    continue;
-                }
-                targetCell = targetRow.createCell(j);
-//                targetCell.setEncoding(sourceCell.getEncoding());
-                targetCell.setCellStyle(sourceCell.getCellStyle());
-                cType = sourceCell.getCellType();
-                targetCell.setCellType(cType);
-                switch (cType) {
-                    case Cell.CELL_TYPE_BOOLEAN:
-                        targetCell.setCellValue(sourceCell.getBooleanCellValue());
-                        break;
-                    case Cell.CELL_TYPE_ERROR:
-                        targetCell.setCellErrorValue(sourceCell.getErrorCellValue());
-                        break;
-                    case Cell.CELL_TYPE_FORMULA:
-                        targetCell.setCellFormula(parseFormula(sourceCell.getCellFormula()));
-                        break;
-                    case Cell.CELL_TYPE_NUMERIC:
-                        targetCell.setCellValue(sourceCell.getNumericCellValue());
-                        break;
-                    case Cell.CELL_TYPE_STRING:
-                        targetCell.setCellValue(sourceCell.getRichStringCellValue());
-                        break;
-                }
-            }
-        }
-    }
-    private static String parseFormula(String pPOIFormula) {
-        final String cstReplaceString = &quot;ATTR(semiVolatile)&quot;; //$NON-NLS-
-        StringBuffer result = null;
-        int index;
-        result = new StringBuffer();
-        index = pPOIFormula.indexOf(cstReplaceString);
-        if (index &gt;= 0) {
-            result.append(pPOIFormula.substring( index));
-            result.append(pPOIFormula.substring(index + cstReplaceString.length()));
-        } else {
-            result.append(pPOIFormula);
-        }
-        return result.toString();
-    }
-    public static String getCellStringValue(Cell cell) {
-        return getCellStringValue(cell, null);
-    }
-    public static String getCellStringValue(Cell cell, DecimalFormat decimalFormat) {
-        DecimalFormat df = decimalFormat == null ? new DecimalFormat(&quot;#&quot;) : decimalFormat;
-        String text = &quot;&quot;;
-        // 判断单元格的类别,并且全部转换成String 类型
-        switch (cell.getCellType()) {
-            case 0: // Numeric
-                text = StringUtils.trimToEmpty(df.format(cell.getNumericCellValue()));
-                break;
-            case 1: // String
-                text = StringUtils.trimToEmpty(cell.getStringCellValue());
-            default:
-                text = StringUtils.trimToEmpty(cell.getStringCellValue());
-                break;
-        }
-        return text;
-    }
-    public static void main(String[] args) {
-        try {
-            InputStream inputStream = new FileInputStream(&quot;d:\\test.xls&quot;);
-            Workbook wb = true ? new HSSFWorkbook(inputStream) : new XSSFWorkbook(inputStream);
-            //source ,target 为,源sheet 页和目标sheet页,
-//           copyRows(wb, &quot;Sheet, &quot;Sheet,   ;
-//           wb.cloneSheet(;
-//           wb.setSheetName( &quot;Sheet);
-            setValue(wb.getSheetAt(0), 5, 5,  &quot;ddd&quot;);
-            setValueWithBorder(wb, wb.getSheetAt(0), 5, 8, &quot;ddd2&quot;);
-            FileOutputStream fileOut = new FileOutputStream(&quot;d:\\testxls&quot;);
-            wb.write(fileOut);
-            fileOut.flush();
-            fileOut.close();
-            System.out.println(&quot;Operation finished&quot;);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static String cellToString(Cell cell) {
-        if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
-            return String.valueOf(cell.getNumericCellValue());
-        } else if (cell.getCellType() == HSSFCell.CELL_TYPE_BOOLEAN) {
-            return String.valueOf(cell.getBooleanCellValue());
-        } else if (cell.getCellType() == HSSFCell.CELL_TYPE_FORMULA) {
-            return String.valueOf(cell.getCellFormula());
-        } else {
-            return cell.getStringCellValue();
-        }
-    }
-    /**
-    * 读取 excel
-    */
-    public static &lt;T&gt; List&lt;T&gt; readExcel(Class&lt;T&gt; clazz, String fileName, InputStream is)
-            throws Exception {
-        String extension = fileName.lastIndexOf(&quot;.&quot;) == -1 ? &quot;&quot; : fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1);
-        // 构造 Workbook 对象
-        Workbook workbook = null;
-        if (&quot;xls&quot;.equals(extension)) {
-            //
-            workbook = new HSSFWorkbook(is);
-        } else if (&quot;xlsx&quot;.equals(extension)) {
-            //
-            workbook = new XSSFWorkbook(is);
-        } else {
-            throw new IOException(&quot;不支持的文件类型&quot;);
-        }
-        // 读取第一页表格
-        Sheet sheet = workbook.getSheetAt(0);
-        Object value = null;
-        Row row = null;
-        Cell cell = null;
-        int counter = 0;
-        //列名、字段
-        Map&lt;String, String&gt; columnMap = new HashMap();
-        Field[] fields = getBeanFields(clazz, new Field[]{});
-        for (Field f : fields) {
-            ExcelAnnotation annotation = f.getAnnotation(ExcelAnnotation.class);
-            if (annotation != null) {
-                if (!columnMap.containsKey(annotation.columnName()))
-                    columnMap.put(annotation.columnName(), f.getName());
-            }
-        }
-        //格式化器
-        DecimalFormat df = new DecimalFormat(&quot;0&quot;);// 格式化 number String
-        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);// 格式化日期字符串
-        DecimalFormat nf = new DecimalFormat(&quot;0.00&quot;);// 格式化数字
-        //临时变量
-        T t = null;
-        //结果列表
-        List&lt;T&gt; resultList = new ArrayList&lt;T&gt;();
-        //行，从第二行开始
-        for (int i = 1; i &lt;= sheet.getLastRowNum(); i++) {
-            row = sheet.getRow(i);
-            if (row == null) {
-                continue;
-            } else {
-                counter++;
-            }
-            t = clazz.newInstance();
-            //列，
-            for (int j = 0; j &lt;= row.getLastCellNum(); j++) {
-                cell = row.getCell(j);
-                if (cell == null) {
-                    continue;
-                }
-                switch (cell.getCellType()) {
-                    case XSSFCell.CELL_TYPE_STRING:
-                        value = cell.getStringCellValue();
-                        break;
-                    case XSSFCell.CELL_TYPE_NUMERIC:
-                        if (&quot;@&quot;.equals(cell.getCellStyle().getDataFormatString())) {
-                            value = df.format(cell.getNumericCellValue());
-                        } else if (&quot;General&quot;.equals(cell.getCellStyle().getDataFormatString())) {
-                            value = nf.format(cell.getNumericCellValue());
-                        } else {
-                            value = sdf.format(HSSFDateUtil.getJavaDate(cell.getNumericCellValue()));
-                        }
-                        break;
-                    case XSSFCell.CELL_TYPE_BOOLEAN:
-                        value = cell.getBooleanCellValue();
-                        break;
-                    case XSSFCell.CELL_TYPE_BLANK:
-                        value = &quot;&quot;;
-                        break;
-                    default:
-                        value = cell.toString();
-                }
-                if (value == null || &quot;&quot;.equals(value)) {
-                    continue;
-                }
-                // 第二个参数通过标题获取属性名
-                String columnName = sheet.getRow(0).getCell(j).toString();
-                org.apache.commons.beanutils.BeanUtils.setProperty(t, columnMap.get(columnName), value);
-            }
-            resultList.add(t);
-        }
-        return resultList;
-    }
-    private static Field[] getBeanFields(Class clazz, Field[] fs){
-        fs = (Field[]) ArrayUtils.addAll(fs, clazz.getDeclaredFields());
-        if(clazz.getSuperclass()!=null){
-            Class clsSup = clazz.getSuperclass();
-            fs = getBeanFields(clsSup, fs);
-        }
-        return fs;
-    }
-}
-</code></pre><h2 id="ExcelAnnotation"><a href="#ExcelAnnotation" class="headerlink" title="ExcelAnnotation"></a>ExcelAnnotation</h2><pre><code>@Retention(RetentionPolicy.RUNTIME) // 注解会在class字节码文件中存在，在运行时可以通过反射获取到
-@Target({ElementType.FIELD})
-public @interface ExcelAnnotation {
-    /**
-    * 列名
-    *
-    * @return
-    */
-    String columnName() default &quot;&quot;;
-}
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">工具类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具/" class="article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/03/注解ExcelUtils/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1342,7 +902,7 @@ public @interface ExcelAnnotation {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis，OGNL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1354,19 +914,7 @@ public @interface ExcelAnnotation {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日期</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1378,15 +926,31 @@ public @interface ExcelAnnotation {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日期</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">奇淫技巧</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
               </li>
             
             <div class="clearfix"></div>
