@@ -172,6 +172,231 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-js验证身份证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/08/js验证身份证/">js验证身份证</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/08/js验证身份证/" class="archive-article-date">
+  	<time datetime="2017-08-08T02:02:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="身份证校验"><a href="#身份证校验" class="headerlink" title="身份证校验"></a>身份证校验</h3><p>国家身份证校验规则：前六位为行政区域代码、中间八位为出生年月信息、三位为顺序码(通常奇数为男偶数为女)、最后一位为校验码（通过数学计算方式得出）</p>
+<h3 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">身份证前17位①</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td>2^17</td>
+<td>2^16</td>
+<td>2^15</td>
+<td>2^14</td>
+<td>2^13</td>
+<td>2^12</td>
+<td>2^11</td>
+<td>2^10</td>
+<td>2^9</td>
+<td>2^18</td>
+<td>2^7</td>
+<td>2^6</td>
+<td>2^5</td>
+<td>2^4</td>
+<td>2^3</td>
+<td>2^2</td>
+<td>2^1</td>
+</tr>
+<tr>
+<td style="text-align:center">除于</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+<td>÷11</td>
+</tr>
+<tr>
+<td style="text-align:center">余数②</td>
+<td>7</td>
+<td>9</td>
+<td>10</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>6</td>
+<td>3</td>
+<td>7</td>
+<td>9</td>
+<td>10</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td style="text-align:center">①*②</td>
+<td>7</td>
+<td>18</td>
+<td>30</td>
+<td>20</td>
+<td>40</td>
+<td>24</td>
+<td>14</td>
+<td>8</td>
+<td>54</td>
+<td>3</td>
+<td>14</td>
+<td>27</td>
+<td>40</td>
+<td>25</td>
+<td>48</td>
+<td>28</td>
+<td>26</td>
+</tr>
+<tr>
+<td style="text-align:center">①*②的和=</td>
+<td>425÷11</td>
+<td>余数</td>
+<td>=</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">余数列表</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">校验码列表</td>
+<td>1</td>
+<td>0</td>
+<td>X</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>所以身份证12345678912345678的最后一位校验码为5</p>
+<h3 id="最后一位可能出现的X并不是英文字母X，而是希腊数字10的缩写X"><a href="#最后一位可能出现的X并不是英文字母X，而是希腊数字10的缩写X" class="headerlink" title="最后一位可能出现的X并不是英文字母Ｘ，而是希腊数字10的缩写X"></a>最后一位可能出现的X并不是英文字母Ｘ，而是希腊数字10的缩写X</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">校验</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/08/js验证身份证/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Oracle学习笔记——创建用户、表空间、权限控制以及用户授权" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -582,91 +807,6 @@ ushr   字符&gt;&gt;&gt;
 
 
   
-    <article id="post-Oracle日期中的IW和WW的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/24/Oracle日期中的IW和WW的区别/">Oracle日期中的IW和WW的区别</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/24/Oracle日期中的IW和WW的区别/" class="archive-article-date">
-  	<time datetime="2017-05-24T00:42:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="WW"><a href="#WW" class="headerlink" title="WW"></a>WW</h3><p>ww是按照年份的第一天(2017-01-01)开始的，不管是不是星期一都是按照第一周计算。</p>
-<h3 id="IW"><a href="#IW" class="headerlink" title="IW"></a>IW</h3><p>IW 是按照普通历法的计算方法计算周数，每年必须包含 52 或者53 周 如果52周后到12月31号剩余四天以上，则为本年的53周，如果52周后到12月31日不满四天，则算到下一年的第一周</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><pre><code>to_char(to_date(&apos;2017/02/03&apos;,&apos;yyyy-MM-dd&apos;),&apos;yyyyww&apos;) 
-
-to_char(to_date(&apos;2017/02/03&apos;,&apos;yyyy-MM-dd&apos;),&apos;yyyyiw&apos;)
-
-to_date(&apos;2017-02-03&apos;,&apos;yyyyww&apos;)
-
-to_date(&apos;2017-02-03&apos;,&apos;yyyyiw&apos;)
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Oracle</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日期</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/24/Oracle日期中的IW和WW的区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -756,6 +896,14 @@ to_date(&apos;2017-02-03&apos;,&apos;yyyyiw&apos;)
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">连接池</a>
               </li>
              
@@ -768,27 +916,7 @@ to_date(&apos;2017-02-03&apos;,&apos;yyyyiw&apos;)
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日期</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">日期转换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,6 +937,26 @@ to_date(&apos;2017-02-03&apos;,&apos;yyyyiw&apos;)
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">日期转换</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日期</a>
               </li>
              
               <li class="article-tag-list-item">
