@@ -172,6 +172,155 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/Linux学习/">Linux学习</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/Linux学习/" class="archive-article-date">
+  	<time datetime="2017-09-01T02:55:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>命令用法都可以用</p>
+<pre><code>命令 --help
+</code></pre><p>获得详细的用法</p>
+<h3 id="拿到一台服务器首先要做"><a href="#拿到一台服务器首先要做" class="headerlink" title="拿到一台服务器首先要做"></a>拿到一台服务器首先要做</h3><ul>
+<li>确认硬盘是否挂载 </li>
+<li>挂载硬盘</li>
+<li>查看服务器状态</li>
+</ul>
+<h4 id="确认硬盘是否挂载？"><a href="#确认硬盘是否挂载？" class="headerlink" title="确认硬盘是否挂载？"></a>确认硬盘是否挂载？</h4><pre><code>fdisk -l
+</code></pre><h4 id="硬盘信息可视化"><a href="#硬盘信息可视化" class="headerlink" title="硬盘信息可视化"></a>硬盘信息可视化</h4><pre><code>df -hl 
+(-hl通常Linux通用命令，用于列出详细信息)
+</code></pre><h4 id="挂载硬盘命令"><a href="#挂载硬盘命令" class="headerlink" title="挂载硬盘命令"></a>挂载硬盘命令</h4><pre><code>mount [-t vfstype] [-o options] device dir   --------(此操作开关机重启后失效)
+-t vfstype 指定文件系统的类型，通常不必指定
+-o options 主要用来描述设备或档案的挂接方式。常用的参数有： 
+    loop：用来把一个文件当成硬盘分区挂接上系统 
+    ro：采用只读方式挂接设备 
+    rw：采用读写方式挂接设备 
+    iocharset：指定访问文件系统所用字符集
+device：要挂接(mount)的设备
+dir：设备在系统上的挂接点(mount point)
+
+vim /etc/fstab -----(配置此硬盘挂载文件，开关机不失效)
+这个文件有六列： 
+第1列是需要挂载的文件系统或存储设备，这里为Windows上的G盘，分区为/dev/sda8. 
+第2列是挂载点，选择为/mnt/winG. 
+第3列指定文件系统或分区的类型，是NTFS类型的，在linux下表示为ntfs.
+第4列为挂载选项，详细参考man mount.
+    auto: 系统自动挂载，fstab默认就是这个选项 
+       ro: read-only 
+       rw: read-write 
+       defaults: rw, suid, dev, exec, auto, nouser, and async.
+第5列为dump选项，设置是否让备份程序dump备份文件系统，0为忽略，1为备份。
+第6列为fsck选项，告诉fsck程序以什么顺序检查文件系统，0为忽略。 
+</code></pre><h4 id="查看服务器状态"><a href="#查看服务器状态" class="headerlink" title="查看服务器状态"></a>查看服务器状态</h4><pre><code>top
+</code></pre><h4 id="硬盘空间是否满了"><a href="#硬盘空间是否满了" class="headerlink" title="硬盘空间是否满了"></a>硬盘空间是否满了</h4><pre><code>du -sh
+du dir -sh
+du * -sh
+</code></pre><h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -zvxf file -c
+    -z 通过GZip过滤归档
+    -x 解压，不加为压缩
+    -v 详细列出处理的文件
+    -f 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名
+    -c 更换目录，不加解压到当前目录
+</code></pre><h3 id="文件授权"><a href="#文件授权" class="headerlink" title="文件授权"></a>文件授权</h3><pre><code>chmod 三位数字 filename
+例子：
+drwxrwxrwx 12 root root  4096 Sep  1 03:44 tmp
+第一位d：代表是目录，diretory
+后面9位分别是三位一组
+
+前三位表示User拥有的权限
+中三位表示Group拥有的权限
+后三位表示Other拥有的权限
+r=read=4   w=write=2 x=execute=1
+rwx表示有读写执行的权限，也就是7
+chmod 777 test.txt  表示test.txt文件 当前用户、当前用户组、其他都有 读写执行权限
+
+改用户组
+chgrp(选项)(参数)
+选项：
+    -c或——changes：效果类似“-v”参数，但仅回报更改的部分； 
+    -f或--quiet或——silent：不显示错误信息； 
+    -h或--no-dereference：只对符号连接的文件作修改，而不是该其他任何相关文件； 
+    -R或——recursive：递归处理，将指令目录下的所有文件及子目录一并处理； 
+    -v或——verbose：显示指令执行过程； 
+    --reference=&lt;参考文件或目录&gt;：把指定文件或目录的所属群组全部设成和参考文件或目的所属群组相同
+参数：
+    组：指定新工作名称
+    文件：指定要改变所属组的文件列表。多个文件或者目录之间使用空格隔开
+
+同时改变用户组和用户
+chown user:grooup file
+</code></pre><h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><pre><code>查看开启端口
+firewall-cmd --list-all
+</code></pre><h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/Linux学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-js验证身份证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -718,95 +867,6 @@ ushr   字符&gt;&gt;&gt;
 
 
   
-    <article id="post-MyBatis注入方式注意-和-的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/24/MyBatis注入方式注意-和-的区别/">MyBatis注入方式注意${}和#{}的区别</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/24/MyBatis注入方式注意-和-的区别/" class="archive-article-date">
-  	<time datetime="2017-05-24T00:53:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="项目中遇到一个问题"><a href="#项目中遇到一个问题" class="headerlink" title="项目中遇到一个问题"></a>项目中遇到一个问题</h3><p>用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型</p>
-<ul>
-<li><p>用${}传入数据直接显示在生成的sql中，如上面的语句，用 role_id =${roleId,jdbcType=INTEGER},那么sql在解析的时候值为role_id = roleid，执行时会报错;</p>
-</li>
-<li><p>${}方式无法防止sql注入;</p>
-</li>
-<li><p>$一般用入传入数据库对象，比如数据库表名;</p>
-</li>
-<li><p>能用#{}时尽量用#{};</p>
-</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>mybaties排序时使用order by 动态参数时需要注意，使用${}而不用#{};</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">注入</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/24/MyBatis注入方式注意-和-的区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -904,15 +964,15 @@ ushr   字符&gt;&gt;&gt;
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">注入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MyBatis，OGNL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -924,15 +984,19 @@ ushr   字符&gt;&gt;&gt;
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis，OGNL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+                <a href="javascript:void(0)" class="js-tag color3">日期</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">校验</a>
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -944,7 +1008,11 @@ ushr   字符&gt;&gt;&gt;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">校验</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -953,10 +1021,6 @@ ushr   字符&gt;&gt;&gt;
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日期</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -172,6 +172,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MyBatis注入方式注意-和-的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/24/MyBatis注入方式注意-和-的区别/">MyBatis注入方式注意${}和#{}的区别</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/24/MyBatis注入方式注意-和-的区别/" class="archive-article-date">
+  	<time datetime="2017-05-24T00:53:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="项目中遇到一个问题"><a href="#项目中遇到一个问题" class="headerlink" title="项目中遇到一个问题"></a>项目中遇到一个问题</h3><p>用Oracle的to_char(${arg},’yyyy-MM-dd’)的时候,方法传来一个时间参数，但是查不到任何结果，看了控制台打印的SQL语句没有发现任何问题，复制到PL/Sql developer 测试运行一下也不行。</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>询问了一下别人才知道，原来${arg}这种注入方式的参数是直接取对象的值不经过转义，用#{arg}注入会转义变成响应的类型</p>
+<ul>
+<li><p>用${}传入数据直接显示在生成的sql中，如上面的语句，用 role_id =${roleId,jdbcType=INTEGER},那么sql在解析的时候值为role_id = roleid，执行时会报错;</p>
+</li>
+<li><p>${}方式无法防止sql注入;</p>
+</li>
+<li><p>$一般用入传入数据库对象，比如数据库表名;</p>
+</li>
+<li><p>能用#{}时尽量用#{};</p>
+</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>mybaties排序时使用order by 动态参数时需要注意，使用${}而不用#{};</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">注入</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/24/MyBatis注入方式注意-和-的区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Oracle日期中的IW和WW的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1167,108 +1256,6 @@ mainApp.constant(&quot;configParam&quot;, &quot;constant value&quot;);
 
 
   
-    <article id="post-关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/">关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/" class="archive-article-date">
-  	<time datetime="2017-03-06T14:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最近项目页面用到angularjs，没学过就仿造里面自带的例子就上手了项目开发，按照里面的写法刚开始还很好使，但是用着用着还是会有些地方</p>
-<p>会用上jQuery的东西，其中就有ajax的异步请求，后台功能写好了以后测试提交发现页面无法显示model的值，虽然进入了回调函数值也有了，但</p>
-<p>是页面显示不出来，等第二次提交的时候才会显示出来，于是我猜是两个问题：</p>
-<p><strong>可能处于不同的域</strong></p>
-<p><strong>model没有刷新</strong></p>
-<p>然后仔细看了一下域是同一个页面也不是什么对象也没有用其他会产生子域的angular指令，所以域是相同的</p>
-<p>后来百度了一下果然不止我一个人有这个问题，其中原因就是用jQuery的ajax回调造成不刷新的问题</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>$scope.$apply();
-或者
-$scope.$apply(function (){
-    ....你变更的数据
-});
-</code></pre><p><code>Scope</code>提供<code>$watch</code>方法监视<code>Model</code>的变化。</p>
-<p><code>Scope</code>提供<code>$apply</code>方法传播<code>Model</code>的变化。</p>
-<p><code>Scope</code>可以继承，用来隔离不同的<code>application components</code>和属性访问权限。</p>
-<p><code>Scope</code>为<code>Expressions</code>的计算提供上下文。</p>
-<h2 id="apply"><a href="#apply" class="headerlink" title="$apply()"></a>$apply()</h2><p>实际上是由<code>scope.digest()</code>完成的，但是我们几乎从来就没有直接调用过这个方法，而是调用<code>scope.apply()</code>方法，</p>
-<p>是因为在<code>scope.apply()</code>方法里面，它会去调用<code>scope.digest()</code>方法。<code>scope.apply()</code>方法带一个函数或者一个表达式，然后执行它，最后调用</p>
-<p><code>scope.digest()</code>方法去更新<code>bindings</code>或者<code>watchers</code>。</p>
-<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a href="http://www.jb51.net/article/59538.htm" target="_blank" rel="external">相关–angularJS中$apply()方法详解</a></p>
-<p><a href="http://blog.csdn.net/dm_vincent/article/details/38705099" target="_blank" rel="external">相关– 理解Angular中的$apply()以及$digest()</a></p>
-<p><a href="http://www.sitepoint.com/understanding-angulars-apply-digest/" target="_blank" rel="external">Understanding Angular’s $apply() and $digest()</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">angularjs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/问题/" class="article-tag-list-link color3">问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/06/关于在angularjs中使用jQuery的ajax异步请求回调函数不刷新model的问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1366,15 +1353,15 @@ $scope.$apply(function (){
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">注入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MyBatis，OGNL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1386,15 +1373,19 @@ $scope.$apply(function (){
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis，OGNL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+                <a href="javascript:void(0)" class="js-tag color3">日期</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">校验</a>
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1406,7 +1397,11 @@ $scope.$apply(function (){
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">校验</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1415,10 +1410,6 @@ $scope.$apply(function (){
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日期</a>
               </li>
              
               <li class="article-tag-list-item">
